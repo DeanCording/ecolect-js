@@ -8,7 +8,7 @@ function scorePartial(tokens, depth, maxDepth, score) {
 
 /**
  * Encounter used when trying to match an expression. Contains all the tokens
- * and functions for accessinng tokens, the current index and the current
+ * and functions for accessing tokens, the current index and the current
  * score.
  */
 class Encounter {
@@ -125,6 +125,16 @@ class Encounter {
 				/*
 				 * The encounter is currently in fuzzy mode and we did not match,
 				 * consume the next token if it's punctuation.
+				 *
+				 * The token will not count towards the score of any match later
+				 * down the expression.
+				 */
+				return this.next(nodes, 0.0, (consumedTokens || 0) + 1, data);
+			}
+			if(results.length === 0 && this.fuzzy  && token) {
+				/**
+				 * The encounter is currently in fuzzy mode and we did not match,
+				 * consume the next token if it's an extraneous word.
 				 *
 				 * The token will not count towards the score of any match later
 				 * down the expression.
