@@ -19,8 +19,8 @@ const intents = ecolect.intents(en)
   		.done()
  	.intent('todo:deadline')
  		.value('date', date())
-// 		.add('show me todos for {date}')
- 		.add('show me the todos for {date}')
+// 		.add('show me todos for {date}')   // This one doesn't work
+ 		.add('show me the todos for {date}')  // This one does work
  		.add('what are the todos for {date}')
  		.done()
 	.build();
